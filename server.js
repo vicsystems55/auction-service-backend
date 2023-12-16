@@ -1,7 +1,10 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
+import auctionItemsRoutes from './routes/auctionItemRoutes.js';
+import auctionSessionRoutes from './routes/auctionSessionRoutes.js';
 
 dotenv.config();
 
@@ -9,7 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -24,6 +28,9 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/auction-items', auctionItemsRoutes);
+app.use('/api/auction-session', auctionSessionRoutes);
+
 
 // Start the server
 app.listen(PORT, () => {
