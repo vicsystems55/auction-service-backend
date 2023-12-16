@@ -7,6 +7,9 @@ const bidSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now },
 });
 
+// Compound index to enforce uniqueness on bidder, amount, and auctionSession
+bidSchema.index({ bidder: 1, amount: 1, auctionSession: 1 }, { unique: true });
+
 const Bid = mongoose.model('Bid', bidSchema);
 
 export default Bid;

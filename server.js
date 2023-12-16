@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import auctionItemsRoutes from './routes/auctionItemRoutes.js';
 import auctionSessionRoutes from './routes/auctionSessionRoutes.js';
+import bidRoutes from './routes/bidRoutes.js';
+
 
 dotenv.config();
 
@@ -30,6 +32,8 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/users', userRoutes);
 app.use('/api/auction-items', auctionItemsRoutes);
 app.use('/api/auction-session', auctionSessionRoutes);
+app.use('/api/bid', bidRoutes);
+
 
 
 // Start the server
